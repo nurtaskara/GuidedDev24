@@ -1,0 +1,17 @@
+﻿{
+  "Descriptor": {
+    "UId": "b444d24c-9b93-8b83-d162-6de2c6f3f732",
+    "Name": "RealtySample",
+    "Type": 1,
+    "ModifiedOnUtc": "\/Date(1714502360000)\/",
+    "Maintainer": "Customer",
+    "ProjectPath": "Files/RealtySample.csproj",
+    "DependsOn": [
+      {
+        "UId": "fe1effeb-74f2-42c5-b5e1-dfe0313b86bf",
+        "PackageVersion": "7.8.0",
+        "Name": "Studio"
+      }
+    ]
+  }
+}
