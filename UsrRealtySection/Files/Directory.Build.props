@@ -3,5 +3,6 @@
 		<Compile Include="$(PkgPath)/UsrRealtySection/Schemas/UsrRealtyOfferTypeSection/UsrRealtyOfferTypeSection.cs" Condition="Exists('$(PkgPath)/UsrRealtySection/Schemas/UsrRealtyOfferTypeSection/UsrRealtyOfferTypeSection.cs')" />
 		<Compile Include="$(PkgPath)/UsrRealtySection/Schemas/UsrRealtySection/UsrRealtySection.cs" Condition="Exists('$(PkgPath)/UsrRealtySection/Schemas/UsrRealtySection/UsrRealtySection.cs')" />
 		<Compile Include="$(PkgPath)/UsrRealtySection/Schemas/UsrRealtyTypeSection/UsrRealtyTypeSection.cs" Condition="Exists('$(PkgPath)/UsrRealtySection/Schemas/UsrRealtyTypeSection/UsrRealtyTypeSection.cs')" />
+		<Compile Include="$(PkgPath)/UsrRealtySection/Schemas/UsrRealtyVisitSection/UsrRealtyVisitSection.cs" Condition="Exists('$(PkgPath)/UsrRealtySection/Schemas/UsrRealtyVisitSection/UsrRealtyVisitSection.cs')" />
 	</ItemGroup>
 </Project>

@@ -12,6 +12,11 @@
         "PackageVersion": "7.8.0",
         "Name": "CrtCore",
         "Type": 1
+      },
+      {
+        "UId": "b444d24c-9b93-8b83-d162-6de2c6f3f732",
+        "Name": "RealtySample",
+        "Type": 1
       }
     ]
   }

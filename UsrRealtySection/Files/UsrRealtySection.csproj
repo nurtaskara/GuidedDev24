@@ -316,6 +316,11 @@
 			<SpecificVersion>False</SpecificVersion>
 			<Private>False</Private>
 		</Reference>
+		<Reference Include="RealtySample">
+			<HintPath>$(RelativePkgFolderPath)/RealtySample/$(StandalonePackageAssemblyPath)/RealtySample.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+			<Private>False</Private>
+		</Reference>
 		<Reference Include="CrtBaseConsts">
 			<HintPath>$(RelativePkgFolderPath)/CrtBaseConsts/$(StandalonePackageAssemblyPath)/CrtBaseConsts.dll</HintPath>
 			<SpecificVersion>False</SpecificVersion>
@@ -477,6 +482,7 @@
 		<Compile Remove="$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtyOfferTypeSection/UsrRealtyOfferTypeSection.cs" Condition="Exists('$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtyOfferTypeSection/UsrRealtyOfferTypeSection.cs')" />
 		<Compile Remove="$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtySection/UsrRealtySection.cs" Condition="Exists('$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtySection/UsrRealtySection.cs')" />
 		<Compile Remove="$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtyTypeSection/UsrRealtyTypeSection.cs" Condition="Exists('$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtyTypeSection/UsrRealtyTypeSection.cs')" />
+		<Compile Remove="$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtyVisitSection/UsrRealtyVisitSection.cs" Condition="Exists('$(RelativePkgFolderPath)/UsrRealtySection/Schemas/UsrRealtyVisitSection/UsrRealtyVisitSection.cs')" />
 	</ItemGroup>
 	<ItemGroup Label="3rd Party References"></ItemGroup>
 	<Target Name="Paths" BeforeTargets="BeforeCompile">

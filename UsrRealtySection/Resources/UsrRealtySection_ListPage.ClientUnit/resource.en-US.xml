@@ -3,6 +3,7 @@
 	<Group Type="String">
 		<Items>
 			<Item Name="Caption" Value="Realty Section list page" />
+			<Item Name="LocalizableStrings.Button_qv92re5_caption.Value" Value="Add Visits" />
 		</Items>
 	</Group>
 </Resources>

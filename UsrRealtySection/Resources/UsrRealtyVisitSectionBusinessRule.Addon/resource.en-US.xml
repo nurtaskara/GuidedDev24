@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="en-US">
+	<Group Type="String">
+		<Items>
+			<Item Name="AddonConfig.Rules.e7cc718e-6e5f-5602-bd42-764448426eb2.Caption" Value="Apply static filter: Owner" />
+			<Item Name="Caption" Value="Realty visit (Section) (Business rules)" />
+		</Items>
+	</Group>
+</Resources>

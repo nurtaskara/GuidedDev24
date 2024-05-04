@@ -1,0 +1,10 @@
+﻿{
+  "Descriptor": {
+    "UId": "56e6a296-84dd-4906-9f8f-2f2f328adeb8",
+    "Name": "UsrRealtyComment",
+    "ModifiedOnUtc": "\/Date(1714836019000)\/",
+    "ManagerName": "ProcessSchemaManager",
+    "Caption": "realty comment",
+    "DependsOn": []
+  }
+}
