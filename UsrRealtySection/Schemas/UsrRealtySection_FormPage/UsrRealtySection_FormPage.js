@@ -1,3 +1,4 @@
+/* jshint esversion: 11 */
 define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function/**SCHEMA_ARGS*/()/**SCHEMA_ARGS*/ {
 	return {
 		viewConfigDiff: /**SCHEMA_VIEW_CONFIG_DIFF*/[
@@ -694,11 +695,19 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 							"path": "PDS.UsrComment"
 						}
 					},
+					
 					"PDS_UsrComment_fn8iqms": {
 						"modelConfig": {
 							"path": "PDS.UsrComment"
-						}
+						},
+						"validators": {
+						 "required": {
+                            "type": ""
+							
+                        }
+                      }
 					},
+					
 					"PDS_UsrCommissionUSD_9915yki": {
 						"modelConfig": {
 							"path": "PDS.UsrCommissionUSD"
@@ -892,6 +901,7 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 					"GridDetail_yfbglpvDS": {
 						"type": "crt.EntityDataSource",
 						"scope": "viewElement",
+                        
 						"config": {
 							"entitySchemaName": "UsrRealtyVisitSection",
 							"attributes": {
@@ -965,6 +975,25 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 			}
 		]/**SCHEMA_MODEL_CONFIG_DIFF*/,
 		handlers: /**SCHEMA_HANDLERS*/[
+			    {
+        request: "crt.HandleViewModelAttributeChangeRequest",
+        /* The custom implementation of the system query handler. */
+        handler: async (request, next) => {
+            if (request.attributeName === 'PDS_UsrPriceUSD_pmwhdb6') {
+                const price = await request.$context.PDS_UsrPriceUSD_pmwhdb6;
+                /* Check the request status. */
+                if (price >= 10000) {
+                  /* If the request is new, apply the required validator to the UsrDescription attribute. */
+                  request.$context.enableAttributeValidator('PDS_UsrComment_fn8iqms', 'crt.Required');
+                } else {
+                   /* Do not apply the required validator to the UsrDescription attribute for non-new requests. */
+                   request.$context.disableAttributeValidator('PDS_UsrComment_fn8iqms', 'crt.Required');
+                }
+            }
+            /* Call the next handler if it exists and return its result. */
+            return next?.handle(request);
+        }
+    },
 			
 			{
 				request: "usr.PushButtonRequest",
@@ -994,9 +1023,30 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 					/* Call the next handler if it exists and return its result. */
 					return next?.handle(request);
 				}
-			}
+			},
+		/*	 {
+     request: "crt.HandleViewModelAttributeChangeRequest",
+	
+     handler: async (request, next) => {
+         if (request.attributeName === 'PDS_UsrPriceUSD_pmwhdb6') {
+        var price = await request.$context.PDS_UsrPriceUSD_pmwhdb6;
+        var comment= await request.PDS_UsrComment_fn8iqms;
+	      
+              if(price>10000){
+               
 			
-			
+				  console.log(" work");
+                        } else {
+                            
+							
+                        }
+		    }
+	     
+		    return next?.handle(request);
+	 
+      },
+				 
+    },*/
 		]/**SCHEMA_HANDLERS*/,
 		converters: /**SCHEMA_CONVERTERS*/{}/**SCHEMA_CONVERTERS*/,
 		validators: /**SCHEMA_VALIDATORS*/{
@@ -1031,7 +1081,6 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 				],
 				async: false
 			}
-
 		}/**SCHEMA_VALIDATORS*/
 	};
 });

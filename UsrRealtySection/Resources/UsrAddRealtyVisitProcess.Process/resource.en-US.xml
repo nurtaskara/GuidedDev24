@@ -27,6 +27,7 @@
 			<Item Name="NotificationCaption.DisplayValue" Value="[#Process name#]" />
 			<Item Name="Parameters.NParameter.Caption" Value="N" />
 			<Item Name="Parameters.NParameter.DisplayValue" Value="3" />
+			<Item Name="Parameters.OwnerParameter.Caption" Value="Owner" />
 			<Item Name="Parameters.RealtyIdParameter.Caption" Value="Realty Id" />
 		</Items>
 	</Group>
