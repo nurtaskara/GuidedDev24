@@ -1,0 +1,14 @@
+﻿{
+  "Descriptor": {
+    "UId": "f842b734-cac8-4bf5-9174-02aa60c60399",
+    "Name": "UsrAddRealtyVisitProcessUsrRealtySection1",
+    "ModifiedOnUtc": "\/Date(1715048489000)\/",
+    "Parent": {
+      "UId": "228fc966-f82c-4afb-b763-eec47f355197",
+      "Name": "UsrAddRealtyVisitProcess"
+    },
+    "ManagerName": "ProcessSchemaManager",
+    "Caption": "Add Realty Visit Process",
+    "DependsOn": []
+  }
+}

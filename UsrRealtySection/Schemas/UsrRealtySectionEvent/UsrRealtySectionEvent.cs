@@ -4,7 +4,7 @@ namespace Terrasoft.Configuration
     using Terrasoft.Common;
     using Terrasoft.Core.Entities;
     using Terrasoft.Core.Entities.Events;
-    [EntityEventListener(SchemaName = "UsrRealtyFreedomUI")]
+    [EntityEventListener(SchemaName = "UsrRealtySection")]
     public class RealtyEntityEventListener : BaseEntityEventListener
     {
         public override void OnSaving(object sender, EntityBeforeEventArgs e)
@@ -16,8 +16,8 @@ namespace Terrasoft.Configuration
             {
                 e.IsCanceled = true;
 
-                string messageTemplate = new LocalizableString(realty.UserConnection.ResourceStorage, 
-                    "UsrRealtyFreedomUIEvents", "LocalizableStrings.ValueIsTooBig.Value").ToString();
+                string messageTemplate = new LocalizableString(realty.UserConnection.ResourceStorage,
+                    "UsrRealtySectionEvent", "LocalizableStrings.ValueIsTooBig.Value").ToString();
 
                 string message = string.Format(messageTemplate, "1.0B$");
                 throw new Exception(message);

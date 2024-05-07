@@ -1,5 +1,5 @@
 /* jshint esversion: 11 */
-define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function/**SCHEMA_ARGS*/()/**SCHEMA_ARGS*/ {
+define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/["@creatio-devkit/common"]/**SCHEMA_DEPS*/, function/**SCHEMA_ARGS*/(sdk)/**SCHEMA_ARGS*/ {
 	return {
 		viewConfigDiff: /**SCHEMA_VIEW_CONFIG_DIFF*/[
 			{
@@ -131,6 +131,22 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 			},
 			{
 				"operation": "insert",
+				"name": "MenuItemRunService",
+				"values": {
+					"type": "crt.MenuItem",
+					"caption": "#ResourceString(MenuItem_uawef9c_caption)#",
+					"visible": true,
+					"clicked": {
+						"request": "usr.RunWebServiceButtonRequest"
+					},
+					"icon": "gear-button-icon"
+				},
+				"parentName": "Button_2qcm5gy",
+				"propertyName": "menuItems",
+				"index": 2
+			},
+			{
+				"operation": "insert",
 				"name": "PushButton",
 				"values": {
 					"type": "crt.Button",
@@ -142,7 +158,7 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 					"visible": true,
 					"icon": "database-icon",
 					"clicked": {
-						"request": "crt.OpenDuplicatesPageRequest"
+						"request": "usr.PushButtonRequest"
 					},
 					"clickMode": "default"
 				},
@@ -695,19 +711,16 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 							"path": "PDS.UsrComment"
 						}
 					},
-					
 					"PDS_UsrComment_fn8iqms": {
 						"modelConfig": {
 							"path": "PDS.UsrComment"
 						},
 						"validators": {
-						 "required": {
-                            "type": ""
-							
-                        }
-                      }
+							"required": {
+								"type": ""
+							}
+						}
 					},
-					
 					"PDS_UsrCommissionUSD_9915yki": {
 						"modelConfig": {
 							"path": "PDS.UsrCommissionUSD"
@@ -901,7 +914,6 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 					"GridDetail_yfbglpvDS": {
 						"type": "crt.EntityDataSource",
 						"scope": "viewElement",
-                        
 						"config": {
 							"entitySchemaName": "UsrRealtyVisitSection",
 							"attributes": {
@@ -1024,29 +1036,51 @@ define("UsrRealtySection_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 					return next?.handle(request);
 				}
 			},
-		/*	 {
-     request: "crt.HandleViewModelAttributeChangeRequest",
-	
-     handler: async (request, next) => {
-         if (request.attributeName === 'PDS_UsrPriceUSD_pmwhdb6') {
-        var price = await request.$context.PDS_UsrPriceUSD_pmwhdb6;
-        var comment= await request.PDS_UsrComment_fn8iqms;
-	      
-              if(price>10000){
-               
-			
-				  console.log(" work");
-                        } else {
-                            
-							
-                        }
-		    }
-	     
-		    return next?.handle(request);
-	 
-      },
-				 
-    },*/
+			{
+				request: "usr.RunWebServiceButtonRequest",
+				/* Implementation of the custom query handler. */
+				handler: async (request, next) => {
+					this.console.log("Run web service button works...");
+
+					// get id from type lookup type object
+					var typeObject = await request.$context.PDS_UsrType_80c370q;
+					var typeId = "";
+					if (typeObject) {
+						typeId = typeObject.value;
+					}
+
+					// get id from type lookup offer type object
+					var offerTypeObject = await request.$context.PDS_UsrOfferType_6qwfo8c;
+					var offerTypeId = "";
+					if (offerTypeObject) {
+						offerTypeId = offerTypeObject.value;
+					}
+                    /* Create an instance of the HTTP client from @creatio-devkit/common. */
+					const httpClientService = new sdk.HttpClientService();
+
+					/* Specify the URL to retrieve the current rate. Use the coindesk.com external service. */
+					const baseUrl = Terrasoft.utils.uri.getConfigurationWebServiceBaseUrl();
+					const transferName = "rest";
+					const serviceName = "RealtyService";
+					const methodName = "GetMaxPriceTypeId";
+					const endpoint = Terrasoft.combinePath(baseUrl, transferName, serviceName, methodName);
+					//const endpoint = "http://localhost/D5_8.0.8.4758/0/rest/RealtyService/GetMaxPriceTypeId";
+					/* Send a POST HTTP request. The HTTP client converts the response body from JSON to a JS object automatically. */
+					var params = {
+						realtyTypeId: typeId,
+						realtyOfferTypeId: offerTypeId,
+						entityName: "UsrRealtySection"
+					};
+					const response = await httpClientService.post(endpoint, params);
+					
+					this.console.log("response max price = " + response.body.GetMaxPriceTypeIdResult);
+					
+					/* Call the next handler if it exists and return its result. */
+					return next?.handle(request);
+				}
+			},
+
+
 		]/**SCHEMA_HANDLERS*/,
 		converters: /**SCHEMA_CONVERTERS*/{}/**SCHEMA_CONVERTERS*/,
 		validators: /**SCHEMA_VALIDATORS*/{

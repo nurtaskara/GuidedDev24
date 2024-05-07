@@ -1,4 +1,4 @@
-define("UsrRealtyClassic1Page", [], function() {
+define("UsrRealtyClassic1Page", ["ServiceHelper"], function(ServiceHelper) {
 	return {
 		entitySchemaName: "UsrRealtyClassic",
 		attributes: {},
@@ -17,7 +17,33 @@ define("UsrRealtyClassic1Page", [], function() {
 		methods: {
 			onMyButtonClick: function() {
 				this.console.log("Button works!");
+			},
+			
+			onRunWebServiceButtonClick: function() {
+				var typeObject = this.get("UsrType");
+				if (!typeObject) {
+					return;
+				}
+				var typeId = typeObject.value;
+				var offerTypeObject = this.get("UsrOfferType");
+				if (!offerTypeObject) {
+					return;
+				}
+				var offerTypeId = offerTypeObject.value;
+				var params = {
+					realtyTypeId: typeId,
+					realtyOfferTypeId: offerTypeId,
+					entityName: "UsrRealtyClassic"
+				};				
+				this.console.log("1");
+				ServiceHelper.callService("RealtyService", "GetMaxPriceTypeId", this.getWebServiceResult, params, this);
+				this.console.log("2");
+			},
+			getWebServiceResult: function(response, success) {
+				this.console.log("3");
+				this.Terrasoft.showInformation("Max price: " + response.GetMaxPriceTypeIdResult + ", success: " + success);
 			}
+
 		},
 		dataModels: /**SCHEMA_DATA_MODELS*/{}/**SCHEMA_DATA_MODELS*/,
 		diff: /**SCHEMA_DIFF*/[
@@ -74,9 +100,7 @@ define("UsrRealtyClassic1Page", [], function() {
 				"propertyName": "items",
 				"index": 2
 			},
-			
-			/* Metadata to add the custom button to the page. */
-            {
+			{
                 /*  Run the operation that inserts the element to the page. */
                 "operation": "insert",
                 /* The meta name of the parent container to add the button. */
@@ -88,7 +112,7 @@ define("UsrRealtyClassic1Page", [], function() {
 	        /* The properties to pass to the element’s constructor. */
                 "values": {
 					"layout": {
-						"colSpan": 10,
+						"colSpan": 8,
 						"rowSpan": 1,
 						"column": 0,
 						"row": 3,
@@ -104,7 +128,27 @@ define("UsrRealtyClassic1Page", [], function() {
                     "style": Terrasoft.controls.ButtonEnums.style.BLUE
                 }
             },
-
+			/* Metadata to add the custom button to the page. */
+            {
+                "operation": "insert",
+                "parentName": "ProfileContainer",
+                "propertyName": "items",
+                "name": "RunWebServiceButton",
+	            "values": {
+					"layout": {
+						"colSpan": 14,
+						"rowSpan": 1,
+						"column": 10,
+						"row": 3,
+						"layoutName": "ProfileContainer"
+					},
+                    "itemType": Terrasoft.ViewItemType.BUTTON,
+                    "caption": {bindTo: "Resources.Strings.RunWebServiceButtonCaption"},
+                    "click": {bindTo: "onRunWebServiceButtonClick"},
+                    "style": Terrasoft.controls.ButtonEnums.style.RED
+                }
+            },
+            
 			{
 				"operation": "insert",
 				"name": "LOOKUP8fa9919e-80d5-4913-ab0d-b402f4ad8d83",

@@ -16,7 +16,7 @@ define("UsrAveragePriceOutputPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 			},
 			{
 				"operation": "insert",
-				"name": "NumberInput_y0tjgs5",
+				"name": "UsrAveragePriceParameter",
 				"values": {
 					"layoutConfig": {
 						"column": 1,
@@ -53,7 +53,7 @@ define("UsrAveragePriceOutputPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function
 					"control": "$PageParameters_UsrTextParameter1_ianzhnj",
 					"multiline": true,
 					"visible": true,
-					"readonly": false,
+					"readonly": true,
 					"placeholder": "",
 					"tooltip": ""
 				},
